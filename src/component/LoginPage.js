@@ -1,26 +1,26 @@
-import React from "react";
+import React from 'react';
 
 const LoginPage = () => {
   const handleButtonClick = () => {
-    window.location.href = "http://localhost:8080/auth/login/url";
+    window.location.href = 'https://fintrack.site/auth/login/url';
   };
 
   return (
     <div
       style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "100vh",
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '100vh',
       }}
     >
       <button
         onClick={handleButtonClick}
         style={{
-          padding: "10px 20px",
-          fontSize: "18px",
-          borderRadius: "5px",
-          cursor: "pointer",
+          padding: '10px 20px',
+          fontSize: '18px',
+          borderRadius: '5px',
+          cursor: 'pointer',
         }}
       >
         <img src={`${process.env.PUBLIC_URL}/kakao_login.png`} />
