@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { formatDate } from '../../formatDate.js';
-import './DailyList.css';
+import './HistoryList.css';
 
-const DailyList = () => {
+const HistoryList = () => {
   const [payments, setPayments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -12,9 +11,11 @@ const DailyList = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const date = formatDate(new Date());
+        const date = new Date();
         const response = await axios.get(
-          `http://localhost:8080/payments/daily?date=${date}`,
+          `https://fintrack.site/payments/monthly?year=${date.getFullYear()}&month=${
+            date.getMonth() + 1
+          }`,
           {
             withCredentials: true,
           }
@@ -38,7 +39,7 @@ const DailyList = () => {
   if (error) return <p>{error}</p>;
 
   return (
-    <div className='daily-list'>
+    <main className='history-list'>
       <h1>결제 내역</h1>
       <table>
         <thead>
@@ -60,8 +61,8 @@ const DailyList = () => {
           ))}
         </tbody>
       </table>
-    </div>
+    </main>
   );
 };
 
-export default DailyList;
+export default HistoryList;
