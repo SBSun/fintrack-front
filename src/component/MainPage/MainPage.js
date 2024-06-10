@@ -1,5 +1,5 @@
 import React from 'react';
-import HistoryList from '../HistoryList/HistoryList';
+import PaymentHistory from '../PaymentHistory';
 import Sidebar from '../Sidebar/Sidebar';
 import { useState } from 'react';
 import './MainPage.css';
@@ -19,7 +19,7 @@ const MainPage = () => {
         activeIndex={activeIndex}
         onMenuClick={handleMenuClick}
       />
-      <HistoryList />;
+      <PaymentHistory />;
     </div>
   );
 };
