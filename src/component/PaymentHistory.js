@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import './HistoryList.css';
+import { HEADERS } from '../data';
+import DataTable from './table/DataTable';
+import '../css/table.css';
 
 const HistoryList = () => {
   const [payments, setPayments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [selection, setSelection] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -35,33 +38,26 @@ const HistoryList = () => {
     fetchData();
   }, []);
 
+  // items를 가공하여 필요한 데이터만 전달
+  const items = payments.map((payment) => ({
+    paymentDt: payment.paymentDt,
+    categoryName: payment.categoryName,
+    price: payment.price,
+    content: payment.content,
+  }));
+
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
 
   return (
-    <main className='history-list'>
-      <h1>결제 내역</h1>
-      <table>
-        <thead>
-          <tr>
-            <th>날짜</th>
-            <th>카테고리</th>
-            <th>내용</th>
-            <th>금액</th>
-          </tr>
-        </thead>
-        <tbody>
-          {payments.map((payment) => (
-            <tr key={payment.paymentSeq}>
-              <td>{payment.paymentDt}</td>
-              <td>{payment.categoryName}</td>
-              <td>{payment.content}</td>
-              <td>{payment.price}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </main>
+    <>
+      <DataTable
+        headers={HEADERS}
+        items={items}
+        selectable={true}
+        updateSelection={setSelection}
+      />
+    </>
   );
 };
 
