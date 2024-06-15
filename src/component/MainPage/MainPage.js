@@ -1,12 +1,12 @@
 import React from 'react';
-import PaymentHistory from '../PaymentHistory';
+import PaymentHistory from '../PaymentHistory/PaymentHistory';
 import Sidebar from '../Sidebar/Sidebar';
 import { useState } from 'react';
 import './MainPage.css';
 
 const MainPage = () => {
   const [activeIndex, setActiveIndex] = useState(0);
-  const sidebarMenus = ['Home'];
+  const sidebarMenus = ['결제 내역'];
 
   const handleMenuClick = (index) => {
     setActiveIndex(index);
@@ -19,7 +19,7 @@ const MainPage = () => {
         activeIndex={activeIndex}
         onMenuClick={handleMenuClick}
       />
-      <PaymentHistory />;
+      <PaymentHistory />
     </div>
   );
 };

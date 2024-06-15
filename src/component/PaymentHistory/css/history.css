@@ -1,9 +1,15 @@
-/* 기본 테이블 스타일 */
-table {
-  border: 1px solid #ddd;
+#history-page {
+  width: 100%; /* 부모 컨테이너의 100%를 차지 */
+  display: flex;
+  flex-direction: column;
+}
+
+#history {
+  padding: 10% 10% 0 10%; /* 위쪽 20%, 좌우 10%, 아래쪽 0% 공백 추가 */
+  box-sizing: border-box; /* 패딩을 포함하여 박스 크기를 계산 */
   border-spacing: 0;
   border-radius: 5px;
-  width: 100%; /* 테이블이 부모 컨테이너의 100%를 차지하게 설정 */
+  width: 100%; /* 부모 컨테이너의 100%를 차지 */
   max-width: 100%; /* 테이블이 컨테이너를 넘지 않게 설정 */
   table-layout: auto; /* 열 너비가 데이터 내용에 따라 자동으로 조절 */
 }
@@ -17,8 +23,7 @@ th {
   white-space: nowrap; /* 텍스트가 셀 너비를 넘지 않게 설정 */
 }
 
-/* 테이블 본문 스타일 */
-table tbody tr td {
+#history tbody tr td {
   padding: 10px;
   margin: 0;
   border-bottom: 1px solid #ddd;
@@ -26,12 +31,12 @@ table tbody tr td {
   white-space: nowrap; /* 텍스트가 셀 너비를 넘지 않게 설정 */
 }
 
-table tbody tr:hover {
+#history tbody tr:hover {
   background-color: #ddd; /* 행 호버 효과 */
   cursor: pointer;
 }
 
-table tbody tr td:nth-child(1) {
+#history tbody tr td:nth-child(1) {
   min-width: auto; /* 첫 번째 열 너비 자동 조정 */
 }
 
@@ -41,7 +46,7 @@ table tbody tr td:nth-child(1) {
 }
 
 /* 비활성화된 행 호버 비활성화 */
-table tbody tr.disabled_row:hover {
+#history tbody tr.disabled_row:hover {
   background-color: transparent;
   cursor: default;
 }
@@ -50,8 +55,7 @@ table tbody tr.disabled_row:hover {
   color: rgb(199, 199, 199); /* 비활성화된 행 텍스트 색상 */
 }
 
-/* 빈 테이블 또는 데이터가 적을 때 테이블 정렬 */
-table tbody::after {
+#history tbody::after {
   content: ''; /* 빈 내용 */
   display: table-row; /* 행처럼 표시 */
   height: 100%; /* 전체 높이 차지 */

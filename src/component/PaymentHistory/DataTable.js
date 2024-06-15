@@ -52,7 +52,7 @@ export default function DataTable({
     return selection.size === getAbledItems(items).length;
   };
   return (
-    <table>
+    <table id='history'>
       <thead>
         <tr>
           {selectable && (
@@ -80,7 +80,6 @@ export default function DataTable({
                ${item.disabled ? 'disabled_row' : ''}
              `}
           >
-            {/* headerKey를 순회하면서 key를 가져옴 */}
             {selectable && (
               <td className='select_column'>
                 <input
@@ -92,9 +91,7 @@ export default function DataTable({
               </td>
             )}
             {headerKey.map((key) => (
-              <td key={key + index}>
-                {item[key]} {/* key로 객체의 값을 출력 */}
-              </td>
+              <td key={key + index}>{item[key]}</td>
             ))}
           </tr>
         ))}
