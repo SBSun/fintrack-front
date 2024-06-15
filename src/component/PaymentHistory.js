@@ -1,14 +1,31 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { HEADERS } from '../data';
-import DataTable from './table/DataTable';
-import '../css/table.css';
+import { HEADERS } from '../../data';
+import DataTable from './DataTable';
+import './css/history.css';
+import PaymentEntryModal from './PaymentEntryModal';
 
 const HistoryList = () => {
   const [payments, setPayments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selection, setSelection] = useState([]);
+  const [modal, setModal] = useState(false);
+  const [paymentInput, setPaymentInput] = useState({
+    content: '',
+    price: '',
+    paymentDt: '',
+    categoryId: '',
+  });
+
+  function handleInputChange(inputIdentifier, newValue) {
+    setPaymentInput((prevPaymentInput) => {
+      return {
+        ...prevPaymentInput,
+        [inputIdentifier]: newValue,
+      };
+    });
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -50,14 +67,26 @@ const HistoryList = () => {
   if (error) return <p>{error}</p>;
 
   return (
-    <>
+    <div id='history-page'>
       <DataTable
         headers={HEADERS}
         items={items}
         selectable={true}
         updateSelection={setSelection}
       />
-    </>
+      <div id='bottom'>
+        <button id='entry' onClick={() => setModal(true)}>
+          <img src={`${process.env.PUBLIC_URL}/entry.png`} />
+        </button>
+      </div>
+      {modal && (
+        <PaymentEntryModal
+          paymentInput={paymentInput}
+          onChange={handleInputChange}
+          onClose={() => setModal(false)}
+        />
+      )}
+    </div>
   );
 };
 
