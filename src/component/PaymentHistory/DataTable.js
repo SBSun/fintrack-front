@@ -52,50 +52,52 @@ export default function DataTable({
     return selection.size === getAbledItems(items).length;
   };
   return (
-    <table id='history'>
-      <thead>
-        <tr>
-          {selectable && (
-            <th>
-              <input
-                type='checkbox'
-                checked={isSelectedAll()}
-                onChange={onChangeSelectAll}
-              />
-            </th>
-          )}
-          {headers.map((header) => (
-            <th key={header.text}>
-              {header.text} {/* 컬럼명 바인딩 */}
-            </th>
-          ))}
-        </tr>
-      </thead>
-      <tbody>
-        {items.map((item, index) => (
-          <tr
-            key={index}
-            className={`
+    <div id='history-container'>
+      <table id='history'>
+        <thead>
+          <tr>
+            {selectable && (
+              <th>
+                <input
+                  type='checkbox'
+                  checked={isSelectedAll()}
+                  onChange={onChangeSelectAll}
+                />
+              </th>
+            )}
+            {headers.map((header) => (
+              <th key={header.text}>
+                {header.text} {/* 컬럼명 바인딩 */}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {items.map((item, index) => (
+            <tr
+              key={index}
+              className={`
                ${selection.has(item[itemKey]) ? 'select_row' : ''} 
                ${item.disabled ? 'disabled_row' : ''}
              `}
-          >
-            {selectable && (
-              <td className='select_column'>
-                <input
-                  type='checkbox'
-                  disabled={item.disabled}
-                  checked={selection.has(item[itemKey])}
-                  onChange={() => onChangeSelect(item[itemKey])}
-                />
-              </td>
-            )}
-            {headerKey.map((key) => (
-              <td key={key + index}>{item[key]}</td>
-            ))}
-          </tr>
-        ))}
-      </tbody>
-    </table>
+            >
+              {selectable && (
+                <td className='select_column'>
+                  <input
+                    type='checkbox'
+                    disabled={item.disabled}
+                    checked={selection.has(item[itemKey])}
+                    onChange={() => onChangeSelect(item[itemKey])}
+                  />
+                </td>
+              )}
+              {headerKey.map((key) => (
+                <td key={key + index}>{item[key]}</td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 }

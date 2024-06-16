@@ -11,21 +11,6 @@ const PaymentHistory = () => {
   const [error, setError] = useState(null);
   const [selection, setSelection] = useState([]);
   const [modal, setModal] = useState(false);
-  const [paymentInput, setPaymentInput] = useState({
-    content: '',
-    price: '',
-    paymentDt: '',
-    categoryId: '',
-  });
-
-  function handleInputChange(inputIdentifier, newValue) {
-    setPaymentInput((prevPaymentInput) => {
-      return {
-        ...prevPaymentInput,
-        [inputIdentifier]: newValue,
-      };
-    });
-  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -67,7 +52,7 @@ const PaymentHistory = () => {
   if (error) return <p>{error}</p>;
 
   return (
-    <div id='history-page'>
+    <div className='flex flex-col w-full items-center'>
       <DataTable
         headers={HEADERS}
         items={items}
@@ -79,13 +64,7 @@ const PaymentHistory = () => {
           <img src={`${process.env.PUBLIC_URL}/entry.png`} />
         </button>
       </div>
-      {modal && (
-        <PaymentEntryModal
-          paymentInput={paymentInput}
-          onChange={handleInputChange}
-          onClose={() => setModal(false)}
-        />
-      )}
+      {modal && <PaymentEntryModal onClose={() => setModal(false)} />}
     </div>
   );
 };

@@ -1,64 +1,77 @@
-#history-page {
-  width: 100%; /* 부모 컨테이너의 100%를 차지 */
-  display: flex;
-  flex-direction: column;
+#history-container {
+  padding-top: 5%;
+  max-width: 100%;
+  width: 70%;
 }
 
 #history {
-  padding: 10% 10% 0 10%; /* 위쪽 20%, 좌우 10%, 아래쪽 0% 공백 추가 */
-  box-sizing: border-box; /* 패딩을 포함하여 박스 크기를 계산 */
+  box-sizing: border-box;
   border-spacing: 0;
   border-radius: 5px;
-  width: 100%; /* 부모 컨테이너의 100%를 차지 */
-  max-width: 100%; /* 테이블이 컨테이너를 넘지 않게 설정 */
-  table-layout: auto; /* 열 너비가 데이터 내용에 따라 자동으로 조절 */
+  table-layout: auto;
+  width: 100%;
 }
 
-/* 테이블 헤더 스타일 */
-th {
+#history tbody {
+  display: block;
+  max-height: 400px;
+  overflow-y: scroll;
+}
+
+#history thead,
+#history tbody tr {
+  display: table;
+  width: 100%;
+}
+
+#history thead tr th {
+  width: 140px;
   padding: 10px;
-  background-color: #f9f9f9; /* 헤더 배경색 */
-  text-align: left; /* 텍스트 정렬 */
+  background-color: #f9f9f9;
+  text-align: left;
   border-bottom: 1px solid #ddd;
-  white-space: nowrap; /* 텍스트가 셀 너비를 넘지 않게 설정 */
+  white-space: nowrap;
+}
+
+#history tbody tr td {
+  width: 140px;
+  text-align: left;
 }
 
 #history tbody tr td {
   padding: 10px;
   margin: 0;
   border-bottom: 1px solid #ddd;
-  text-align: left; /* 셀 텍스트 정렬 */
-  white-space: nowrap; /* 텍스트가 셀 너비를 넘지 않게 설정 */
+  text-align: left;
+  white-space: nowrap;
 }
 
 #history tbody tr:hover {
-  background-color: #ddd; /* 행 호버 효과 */
+  background-color: #ddd;
   cursor: pointer;
 }
 
 #history tbody tr td:nth-child(1) {
-  min-width: auto; /* 첫 번째 열 너비 자동 조정 */
+  min-width: auto;
 }
 
-/* 선택된 행 스타일 */
 .select_row {
   background-color: rgb(240, 240, 240);
 }
 
-/* 비활성화된 행 호버 비활성화 */
 #history tbody tr.disabled_row:hover {
   background-color: transparent;
   cursor: default;
 }
 
 .disabled_row {
-  color: rgb(199, 199, 199); /* 비활성화된 행 텍스트 색상 */
+  color: rgb(199, 199, 199);
 }
 
 #history tbody::after {
-  content: ''; /* 빈 내용 */
-  display: table-row; /* 행처럼 표시 */
-  height: 100%; /* 전체 높이 차지 */
+  content: '';
+  display: table-row;
+  height: 100%;
 }
 
 #bottom {
@@ -79,9 +92,9 @@ button:hover {
 }
 
 #entry-modal {
-  width: 550px;
-  height: 700px;
-  background-color: antiquewhite;
+  width: 500px;
+  height: 500px;
+  background-color: #d9efe0;
   text-align: center;
   position: absolute;
   top: 50%;
@@ -91,7 +104,14 @@ button:hover {
   align-items: center;
 }
 
+#entry-modal h2 {
+  padding-top: 1rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
 .input-group {
+  padding: 10% 20% 10% 20%;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
