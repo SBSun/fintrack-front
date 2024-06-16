@@ -1,8 +1,7 @@
 import React from 'react';
-import PaymentHistory from '../PaymentHistory/PaymentHistory';
-import Sidebar from '../Sidebar/Sidebar';
+import PaymentHistory from './PaymentHistory/PaymentHistory';
+import Sidebar from './Sidebar/Sidebar';
 import { useState } from 'react';
-import './MainPage.css';
 
 const MainPage = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -13,7 +12,7 @@ const MainPage = () => {
   };
 
   return (
-    <div id='app'>
+    <div className='flex h-screen w-full overflow-hidden'>
       <Sidebar
         menus={sidebarMenus}
         activeIndex={activeIndex}

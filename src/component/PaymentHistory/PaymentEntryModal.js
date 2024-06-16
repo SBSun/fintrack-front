@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
+import PaymentInput from './PaymentInput';
 
 export default function PaymentEntryModal({ onClose }) {
   const [paymentInput, setPaymentInput] = useState({
@@ -45,43 +46,33 @@ export default function PaymentEntryModal({ onClose }) {
     <div id='entry-modal'>
       <h2>결제내역 입력</h2>
       <div className='input-group'>
-        <p>
-          <label>날짜</label>
-          <input
-            value={paymentInput.paymentDt}
-            onChange={(e) => handleInputChange('paymentDt', e.target.value)}
-          />
-        </p>
-        <p>
-          <label>금액</label>
-          <input
-            value={paymentInput.price}
-            onChange={(e) => handleInputChange('price', e.target.value)}
-            type='number'
-          />
-        </p>
-        <p>
-          <label>카테고리</label>
-          <input
-            value={paymentInput.categoryId}
-            onChange={(e) => handleInputChange('categoryId', e.target.value)}
-            type='number'
-          />
-        </p>
-        <p>
-          <label>내용</label>
-          <input
-            value={paymentInput.content}
-            onChange={(e) => handleInputChange('content', e.target.value)}
-          />
-        </p>
+        <PaymentInput
+          label='날짜'
+          invalid={false}
+          onChange={(e) => handleInputChange('paymentDt', e.target.value)}
+        />
+        <PaymentInput
+          label='금액'
+          invalid={false}
+          onChange={(e) => handleInputChange('price', e.target.value)}
+          type='number'
+        />
+        <PaymentInput
+          label='카테고리'
+          invalid={false}
+          onChange={(e) => handleInputChange('categoryId', e.target.value)}
+          type='number'
+        />
+        <PaymentInput
+          label='내용'
+          invalid={false}
+          onChange={(e) => handleInputChange('content', e.target.value)}
+        />
       </div>
-      <p>
+      <div className='flex justify-center gap-4 pb-14'>
         <button onClick={handleEntryClick}>등록</button>
-      </p>
-      <p>
         <button onClick={onClose}>취소</button>
-      </p>
+      </div>
     </div>
   );
 }
