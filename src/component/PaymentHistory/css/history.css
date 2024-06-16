@@ -55,10 +55,6 @@
   min-width: auto;
 }
 
-#col_select {
-  width: 30px;
-}
-
 .select_row {
   background-color: rgb(240, 240, 240);
 }
@@ -96,7 +92,7 @@ button:hover {
 }
 
 #entry-modal {
-  width: 300px;
+  width: 500px;
   height: 500px;
   background-color: #d9efe0;
   text-align: center;

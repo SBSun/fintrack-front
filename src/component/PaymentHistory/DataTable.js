@@ -55,7 +55,7 @@ export default function DataTable({
     <div id='history-container'>
       <table id='history'>
         <thead>
-          <tr id='col_select'>
+          <tr>
             {selectable && (
               <th>
                 <input
