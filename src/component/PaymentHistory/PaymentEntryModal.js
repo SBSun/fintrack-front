@@ -9,8 +9,10 @@ export default function PaymentEntryModal({ onClose }) {
     content: '',
     price: '',
     paymentDt: getCurrentDateTime(),
-    categoryId: '',
+    categoryId: 1,
   });
+
+  const [image, setImage] = useState(null);
 
   function handleInputChange(inputIdentifier, newValue) {
     setPaymentInput((prevPaymentInput) => {
@@ -21,27 +23,42 @@ export default function PaymentEntryModal({ onClose }) {
     });
   }
 
+  function handleImageChange(event) {
+    setImage(event.target.files[0]);
+  }
+
   function handleEntryClick() {
+    const formData = new FormData();
+
     const [date, time] = paymentInput.paymentDt.split('T');
     const formattedTime = `${time}:00`;
     const formattedDateTime = `${date} ${formattedTime}`;
 
-    axios
-      .post(
-        'https://fintrack.site/payments',
-        {
+    const jsonBlob = new Blob(
+      [
+        JSON.stringify({
           content: paymentInput.content,
           price: parseInt(paymentInput.price),
           paymentDt: formattedDateTime,
           categoryId: parseInt(paymentInput.categoryId),
+        }),
+      ],
+      { type: 'application/json' }
+    );
+
+    formData.append('param', jsonBlob);
+    formData.append('image', image);
+
+    axios
+      .post('https://fintrack.site/payments', formData, {
+        withCredentials: true,
+        headers: {
+          'Content-Type': 'multipart/form-data',
         },
-        {
-          withCredentials: true,
-        }
-      )
+      })
       .then(function (response) {
         console.log(response);
-        window.location.reload();
+        // window.location.reload();
       })
       .catch(function (error) {
         console.log(error);
@@ -84,6 +101,10 @@ export default function PaymentEntryModal({ onClose }) {
           valid={contentValid}
           onChange={(e) => handleInputChange('content', e.target.value)}
         />
+        <div>
+          <label className='text-left'>이미지</label>
+          <input type='file' accept='image/*' onChange={handleImageChange} />
+        </div>
       </div>
       <div className='flex justify-center gap-4 pb-14'>
         <button onClick={handleEntryClick}>등록</button>
